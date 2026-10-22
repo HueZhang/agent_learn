@@ -1,0 +1,11 @@
+# 这是示例配置，可以安全地提交到仓库。
+# 使用方法：复制本文件为 config.toml，然后把 api_key 换成你自己的密钥。
+#
+#   Windows:  copy config.example.toml config.toml
+#   macOS/Linux:  cp config.example.toml config.toml
+#
+# 注意：config.toml 已被 .gitignore 排除，永远不要提交它。
+
+api_key = "your-api-key-here"
+base_url = "https://api.deepseek.com"
+model = "deepseek-flash"

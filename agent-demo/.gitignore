@@ -1,0 +1,5 @@
+# 本目录下的真实配置文件包含 API Key，禁止提交
+config.toml
+
+# 只保留示例配置
+!config.example.toml
