@@ -1,0 +1,16 @@
+# local env / secrets
+.env
+.env.*
+
+# downloaded raw data (large, reproducible via scripts/prepare_adventureworks)
+data/raw/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# sqlite scratch
+*.db
+*.sqlite

@@ -1,0 +1,18 @@
+1. 模型会出错，有幻觉；需要有兜底设计
+2. 上下文窗口，token，成本，延迟
+
+
+！ 重点：
+评测（eval）：怎么判断 agent 变好还是变差，这是目前最缺人的环节之一
+可观测性：日志、trace、成本监控
+稳定性：超时、限流、幂等、权限控制、安全（比如提示词注入）
+异步任务、状态持久化、与现有业务系统集成
+
+
+RAG：
+1. 为什么选择 RAG 方法
+2. RAG 处理流程（The RAG pipeline）
+3. 索引处理：数据分块、基于上下文的检索方式（Indexing: chunking, contextual retrieval）
+4. 检索方式：BM25、DPR、ColBERT（Retrieval: BM25, DPR, ColBERT）
+5. 代理式 RAG：自我 RAG、搜索-R1 （Agentic RAG: Self-RAG, Search-R1）
+6. 失效模式分析 （Failure modes）
