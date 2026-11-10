@@ -1,0 +1,60 @@
+ChatCompletion(
+    id='chatcmpl-af0bfd3496e2741262d93ef7570c3922', 
+    choices=[
+        Choice(
+            finish_reason='tool_calls', 
+            index=0, 
+            logprobs=None, 
+            message=ChatCompletionMessage(
+                content=None, 
+                refusal=None, 
+                role='assistant',
+                annotations=None, 
+                audio=None, 
+                function_call=None, 
+                tool_calls=[
+                    ChatCompletionMessageFunctionToolCall(
+                        id='chatcmpl-tool-b15e7de8ee897685', 
+                        function=Function(
+                            arguments='{"city": "New York City"}', 
+                            name='get_weather' # 第一轮返回需要调用获取天气工具
+                            ), 
+                            type='function')], 
+                            reasoning_content=
+                            'Okay, the user wants to know the weather in New York City and if it\'s cold,
+                             I need to buy a coat. Let me start by checking the weather first. 
+                             I should call the get_weather function with the city parameter set to "New York City".
+                            Once I have the weather data, 
+                            I need to determine if it\'s considered cold. 
+                            Hmm, what\'s the threshold for cold?
+                             Maybe below 10°C or 50°F? The user didn\'tspecify, 
+                             so I\'ll have to make a judgment based on typical definitions. 
+                             Let\'s see what the temperature is. 
+                             If the temperature is low enough, 
+                             then I\'ll proceed to buy the coat using the buy_coat tool. 
+                             Wait, but I should make sure the temperature is in Celsius or Fahrenheit.
+                            The tool might return a specific unit. 
+                            Let me check the weather first.'))], 
+                            created=1794321079, 
+                            model='workbuddy-ai/hy4free', 
+                            object='chat.completion', 
+                            metadata=None, 
+                            moderation=None, 
+                            service_tier=None, 
+                            system_fingerprint=None, 
+                            usage=CompletionUsage(
+                                completion_tokens=189, 
+                                prompt_tokens=281, 
+                                total_tokens=470, 
+                                completion_tokens_details=CompletionTokensDetails(
+                                    accepted_prediction_tokens=None, 
+                                    audio_tokens=None, 
+                                    reasoning_tokens=172, 
+                                    rejected_prediction_tokens=None, 
+                                    text_tokens=None), 
+                                    prompt_tokens_details=PromptTokensDetails
+                                    (audio_tokens=None, 
+                                    cache_write_tokens=0, 
+                                    cached_tokens=192, 
+                                    image_tokens=None, 
+                                    text_tokens=None)))

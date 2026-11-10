@@ -119,15 +119,123 @@ bind_tools 返回的 llm_with_tools 是一个"记住了有哪些工具可用"的
 
 
 
+# Message:
 
+如何告诉ai.
 
+```python
+# 1. 纯字符串（最简单，会被当成一条 HumanMessage）
+model.invoke("你好")
 
+# 2. 字典（OpenAI 风格，就是你贴的那种）
+model.invoke([
+    {"role": "system", "content": "你是助手"},
+    {"role": "user", "content": "你好"},
+])
+
+# 3. Message 对象
+from langchain.messages import SystemMessage, HumanMessage, AIMessage, ToolMessage
+# 旧版导入路径：from langchain_core.messages import ...
+model.invoke([
+    SystemMessage("你是助手"),
+    HumanMessage("你好"),
+])
+
+# 4. 元组简写（较老的写法，多见于旧示例）
+model.invoke([("system", "你是助手"), ("human", "你好")])
+
+# 5. 提示词模板（带变量，可复用）
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "你是{role}"),
+    MessagesPlaceholder("history"),   # 插入一整段历史消息
+    ("human", "{question}"),
+])
+chain = prompt | model
+```
+
+**1、2、4 最终都会被转换成 Message 对象**，所以功能上基本等价
+
+## role:
+
+| role（字典） | 对应的 Message 类 | 谁产生   | 用途                          |
+| ------------ | ----------------- | -------- | ----------------------------- |
+| `system`     | `SystemMessage`   | 开发者   | 设定模型的身份、规则、风格    |
+| `user`       | `HumanMessage`    | 用户     | 用户的输入                    |
+| `assistant`  | `AIMessage`       | 模型     | 模型的回复，可带 `tool_calls` |
+| `tool`       | `ToolMessage`     | 你的代码 | 工具执行结果，回传给模型      |
+
+注意:不同模型对 `system` 的位置有要求。大多数要求**放在最前面**，有些 provider（比如 Anthropic 的原生 API）是把 system 单独作为一个参数而不是放在 messages 里
 
 # Agent Loop
 
+> 个人理解:
+>  比如用户输入一句话，但是包含多个任务，比如：看看最近一段的天气是不是变冷了，冷的就给我买一件外套。 可以拆开，第一个是查询天气，第二个是调用api购买外套；也有可能最近天气很好，不需要再购买外套。 agent loop就是在判断任务是否完成，在一直调用工具处理任务。
+>
+> 「不断感知执行结果、更新对任务的理解、决策下一步行动，并验证是否达到目标」的闭环。
+
+```python
+while not done:
+    response = call_llm(messages)
+    if response has tool_calls:
+        results = execute_tools(response.tool_calls)
+        messages.append(results)
+    else:
+        done = True
+```
+
+> LangChain 官方将这一模式总结为：“**Agent is just a model calling tools in a loop until a task is complete.**”
 
 
 
+## 手写一个简易agent loop:
+
+1. 实现 Tool Registry
+
+   ```python
+   def calculate(expression: str):
+       return eval(expression)
+   
+   def get_weather():
+       return {
+           "city": "Singapore",
+           "temperature": 28,
+           "condition": "Cloudy"
+       }
+   
+   
+   # Tool Registry
+   tools = {
+       "calculate": calculate,
+       "get_weather": get_weather
+   }
+   ```
+
+   
+
+2. 让 LLM 知道有哪些工具:把工具描述转换成 LLM 能理解的格式
+
+   
+
+3. 实现 Tool Executor
+
+
+
+
+
+# OPENAI两种api
+
+| Responses API                  | Chat Completions API          |
+| ------------------------------ | ----------------------------- |
+| `response.output`              | `response.choices[0].message` |
+| `item.type == "function_call"` | `message.tool_calls`          |
+| `call.name`                    | `call.function.name`          |
+| `call.arguments`               | `call.function.arguments`     |
+| `call.call_id`                 | `call.id`                     |
+| `function_call_output`         | `role="tool"`                 |
+| `response.output_text`         | `message.content`             |
+
+# MCP:
 
 # 问题：
 

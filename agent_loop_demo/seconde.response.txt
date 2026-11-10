@@ -1,0 +1,13 @@
+ChatCompletion(id='chatcmpl-09b6a535273341a9afe6f11a782945e3', 
+choices=[Choice(finish_reason='tool_calls', index=0, logprobs=None, 
+message=ChatCompletionMessage(content=None, refusal=None, role='assistant', annotations=None, audio=None, 
+function_call=None, 
+tool_calls=[ChatCompletionMessageFunctionToolCall(id='chatcmpl-tool-a57e3311bdaf5f53', 
+function=Function(arguments='{}', name='buy_coat' # 第二轮返回调用buy coat工具
+), 
+type='function')], 
+# reason---------====
+reasoning_content="The weather in New York City is very cold,
+ so I should buy a coat as requested. 
+ I'll call the buy_coat tool now."))], 
+ created=1794321081, model='workbuddy-ai/hy4free', object='chat.completion', metadata=None, moderation=None, service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=38, prompt_tokens=329, total_tokens=367, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=None, audio_tokens=None, reasoning_tokens=29, rejected_prediction_tokens=None, text_tokens=None), prompt_tokens_details=PromptTokensDetails(audio_tokens=None, cache_write_tokens=0, cached_tokens=256, image_tokens=None, text_tokens=None)))
