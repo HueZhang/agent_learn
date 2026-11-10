@@ -219,9 +219,33 @@ while not done:
 
 3. 实现 Tool Executor
 
+4. 发起请求,接收响应
+
+5. 是否需要调用tool,
+
+6. 调用tool excutor执行tool
+
+7. 发送请求,接收响应
+
+8. 循环重复,直到不需要调用工具.
 
 
 
+现在我们的 Agent Loop 是：
+
+```
+LLM → Tool Call → Execute → Result → LLM
+```
+
+如果某个工具执行了 30 秒，期间 Agent 进程崩溃了，重启之后应该怎么办？
+
+如果工具已经成功下单，但 Agent 没有收到返回结果，又应该怎么办？
+
+这就涉及 Agent Runtime 的三个核心工程能力：
+
+- State Persistence（状态持久化）
+- Execution Recovery（执行恢复）
+- Idempotency（幂等性）
 
 # OPENAI两种api
 
