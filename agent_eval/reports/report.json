@@ -1,0 +1,64 @@
+{
+  "metrics": {
+    "total": 3,
+    "success_rate": 0.0,
+    "tool_selection_accuracy": 0.0,
+    "error_rate": 0.0,
+    "avg_steps": 2.3333333333333335,
+    "avg_latency": 8.053666666666667
+  },
+  "results": [
+    {
+      "id": "T1",
+      "input": "1+2等于多少?",
+      "success": false,
+      "answer_match": true,
+      "tool_match": false,
+      "expected_tools": [
+        "Calculator"
+      ],
+      "actual_tools": [
+        "Calculator",
+        "Calculator"
+      ],
+      "answer": "1 + 2 = 3 😊\n\n有其他问题随时问我哦～",
+      "steps": 3,
+      "latency": 12.438,
+      "error": null
+    },
+    {
+      "id": "T2",
+      "input": "计算 123 * 456",
+      "success": false,
+      "answer_match": true,
+      "tool_match": false,
+      "expected_tools": [
+        "calculator"
+      ],
+      "actual_tools": [
+        "Calculator",
+        "Calculator"
+      ],
+      "answer": "123 × 456 = **56088**",
+      "steps": 3,
+      "latency": 6.778,
+      "error": null
+    },
+    {
+      "id": "T3",
+      "input": "计算 10 + 20，然后乘以 2",
+      "success": false,
+      "answer_match": true,
+      "tool_match": false,
+      "expected_tools": [
+        "calculator",
+        "calculator"
+      ],
+      "actual_tools": [],
+      "answer": "我们分步来计算：\n\n1. 先计算加法：10 + 20 = 30  \n2. 再将结果乘以 2：30 × 2 = 60  \n\n最终结果是 **60**。",
+      "steps": 1,
+      "latency": 4.945,
+      "error": null
+    }
+  ]
+}
